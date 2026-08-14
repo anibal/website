@@ -5,7 +5,7 @@ category: decision
 status: active
 tags: [performance]
 created: "2026-08-07T20:30:49"
-updated: "2026-08-08T00:55:56"
+updated: "2026-08-14T12:29:59"
 ---
 
 <!-- compiled_truth -->
@@ -35,3 +35,9 @@ updated: "2026-08-08T00:55:56"
   summary: "font-display clause amended: swap → optional (with metric-matched fallbacks + selective preload); swap made the CLS=0 gate unsatisfiable. See [[font-loading-strategy]]. CI measures with devtools throttling, see [[lhci-devtools-throttling]]."
   source: session 1 LHCI experiments
   affects: [font-loading-strategy, lhci-devtools-throttling]
+
+- time: 2026-08-14T12:29:59
+  kind: note
+  summary: "Deploy pipeline live: Cloudflare (Workers static assets) auto-deploys main; preview at https://website.anibalrojas.workers.dev/ — verified both locales + fonts serving"
+  source: "anibal, session 2 kickoff"
+  affects: [performance-as-design-feature]

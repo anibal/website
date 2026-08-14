@@ -1,6 +1,6 @@
 # Brain Index
 
-_Auto-generated. Last updated 2026-08-14T17:15:44.831Z._
+_Auto-generated. Last updated 2026-08-14T19:41:06.161Z._
 
 - [astro-5-static-islands](pages/astro-5-static-islands.md) — category: decision | tags: [stack, performance] | **Decided:** Astro 5 with static output. Client JavaScript is an allowlist of three islands: the language-aware header (only if it proves ne
 - [en-default-locale](pages/en-default-locale.md) — category: decision | tags: [i18n, content] | **Decided:** EN is the default locale at `/`; Spanish lives under `/es/`.

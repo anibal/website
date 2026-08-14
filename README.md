@@ -21,8 +21,9 @@ npm run preview  # serve the built site
 
 ## Deploy
 
-Cloudflare Pages, auto-deploy from `main`; PRs get preview deploys.
-Dashboard settings: framework preset **Astro**, build command `npm run build`, output `dist/`.
+Cloudflare (Workers static assets), auto-deploy from `main`; PRs get preview deploys.
+**Live preview: https://website.anibalrojas.workers.dev/** (EN at `/`, ES at `/es/`).
+Build: `npm run build`, output `dist/`.
 CI (`.github/workflows/ci.yml`) runs build + Lighthouse CI assertions on every PR (100/100/100/100, LCP<1.5s, CLS=0, TBT<50ms).
 
 ## Structure
