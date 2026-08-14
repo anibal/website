@@ -1,0 +1,85 @@
+---
+import { getLocale, useTranslations, equivalentPath, homePath } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href={homePath(locale)} aria-label="Aníbal Rojas — home"><b>~</b>/anibal-rojas</a>
+    <div class="header-right">
+      <nav class="lang-toggle" aria-label={t('a11y.language')}>
+        <a
+          class:list={['locale-link', { active: locale === 'en' }]}
+          href={equivalentPath(currentPath, 'en')}
+          aria-current={locale === 'en' ? 'true' : undefined}
+          hreflang="en"
+        >EN</a>
+        <a
+          class:list={['locale-link', { active: locale === 'es' }]}
+          href={equivalentPath(currentPath, 'es')}
+          aria-current={locale === 'es' ? 'true' : undefined}
+          hreflang="es"
+        >ES</a>
+      </nav>
+      {/* TODO(#contact-page): point at /contact/ once it exists (session 5) */}
+      <a class="btn header-cta" href="#contact">{t('cta.book')}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 14px var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+  .wordmark {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  .wordmark b { color: var(--amber); }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .lang-toggle {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--card);
+  }
+  .locale-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    padding: 7px 12px;
+    transition: color var(--dur-1) var(--ease);
+  }
+  .locale-link:hover { color: var(--amber); }
+  .locale-link.active { background: var(--ink); color: var(--paper); }
+  .locale-link.active:hover { color: var(--paper); }
+  .header-cta { display: none; }
+  @media (min-width: 700px) { .header-cta { display: inline-block; } }
+</style>

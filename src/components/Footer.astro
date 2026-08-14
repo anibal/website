@@ -1,0 +1,62 @@
+---
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer" id="contact">
+  <div class="inner">
+    <span class="eyebrow">{t('footer.eyebrow')}</span>
+    <h2>{t('footer.title')}</h2>
+    {/* TODO(links): real Calendly URL + email + LinkedIn + Substack from Aníbal (content gate) */}
+    <a class="btn" href="#contact">{t('cta.book')}</a>
+    <nav class="links" aria-label="Elsewhere">
+      <a href="#">email</a>
+      <a href="#">linkedin</a>
+      <a href="#">substack</a>
+      <a href="https://ocorres.com" target="_blank" rel="noopener">ocorres.com</a>
+    </nav>
+    <p class="colophon">© {year} Aníbal Rojas · Medellín, Colombia · {t('footer.colophon')}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding: var(--space-6) var(--space-3) var(--space-5);
+    background: var(--card);
+  }
+  .site-footer .inner { text-align: center; }
+  .site-footer h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-h2-lg);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+  }
+  .links {
+    margin-top: var(--space-4);
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .links a {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-family: var(--font-mono);
+    transition: color var(--dur-1) var(--ease);
+    background-image: none;
+  }
+  .links a:hover { color: var(--amber); }
+  .colophon {
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--muted);
+  }
+</style>

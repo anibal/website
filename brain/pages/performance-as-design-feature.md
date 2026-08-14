@@ -1,0 +1,37 @@
+---
+id: performance-as-design-feature
+title: Performance budgets are a design feature and a ship gate
+category: decision
+status: active
+tags: [performance]
+created: "2026-08-07T20:30:49"
+updated: "2026-08-08T00:55:56"
+---
+
+<!-- compiled_truth -->
+**Decided:** ship gates — Lighthouse (mobile, throttled, enforced in CI) **100/100/100/100** on the homepage and a representative post; LCP < 1.5s, CLS = 0, TBT < 50ms. Supporting budgets: ≤30KB total JS on the homepage and 0KB on posts; fonts self-hosted woff2 subsets (Latin + Latin-ext), preloaded, `font-display: swap`, no Google Fonts requests; images AVIF/WebP with explicit dimensions; Plausible is the *only* third-party request, deferred.
+
+**Rationale:** for an audience of engineering executives, a perfect score is an aesthetic statement and a sales argument — the site must be shockingly fast.
+
+**Blast radius:** every asset, font, script, and component spends from a budget; CI blocks regressions (build + Lighthouse CI on PRs); even the subtle paper-grain texture is dropped if it breaks the budget or reads as decoration. See [[astro-5-static-islands]].
+
+
+## Timeline
+
+- time: 2026-08-07T20:30:49
+  kind: decision
+  summary: "Created this page: Performance budgets are a design feature and a ship gate"
+  source: HANDOFF-anibalrojas-site.md
+  affects: [performance-as-design-feature]
+
+- time: 2026-08-07T20:31:30
+  kind: decision
+  summary: "captured from handoff budgets + acceptance criteria"
+  source: HANDOFF-anibalrojas-site.md
+  affects: [performance-as-design-feature]
+
+- time: 2026-08-08T00:55:56
+  kind: reversal
+  summary: "font-display clause amended: swap → optional (with metric-matched fallbacks + selective preload); swap made the CLS=0 gate unsatisfiable. See [[font-loading-strategy]]. CI measures with devtools throttling, see [[lhci-devtools-throttling]]."
+  source: session 1 LHCI experiments
+  affects: [font-loading-strategy, lhci-devtools-throttling]

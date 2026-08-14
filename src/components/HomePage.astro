@@ -1,0 +1,108 @@
+---
+/**
+ * Homepage template — shared by both locales.
+ * Session 1 scope: hero + thesis on the real design system, proving tokens,
+ * fonts, i18n and motion vocabulary. Full section build-out (Who I am, Proof,
+ * Services, Ideas, signature element) lands in sessions 2–3 per the approved
+ * copy doc (reference/homepage-copy-anibal-rojas.md — pending).
+ */
+import Base from '../layouts/Base.astro';
+import { useTranslations, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<Base>
+  <section class="hero">
+    <div class="inner">
+      <span class="eyebrow">{t('hero.eyebrow')}</span>
+      <h1>
+        <span set:html={t('hero.title')} /><span class="cursor" aria-hidden="true"></span>
+      </h1>
+      <p>{t('hero.lede')}</p>
+      <div class="actions">
+        <a class="btn" href="#contact">{t('cta.book')}</a>
+        <a class="btn ghost" href="#thesis">{t('hero.cta.secondary')}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="thesis" id="thesis">
+    <div class="inner">
+      <div class="block">
+        <h2>{t('thesis.title')}</h2>
+        <p>{t('thesis.p1')}</p>
+        <p set:html={t('thesis.p2')} />
+        {/* TODO(session-3): The Bottleneck signature element mounts here (static SVG fallback first). */}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: var(--space-7) var(--space-3) var(--space-6);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 640;
+    font-size: var(--text-hero);
+    line-height: var(--leading-display);
+    letter-spacing: -0.015em;
+    max-width: 21ch;
+    text-wrap: balance;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 560;
+    color: var(--amber);
+  }
+  .hero p {
+    max-width: var(--prose);
+    margin-top: var(--space-4);
+    font-size: 1.08rem;
+  }
+  .hero .actions {
+    margin-top: var(--space-4);
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .thesis {
+    padding: 0 var(--space-3) var(--space-6);
+  }
+  .thesis .block {
+    border-left: 3px solid var(--amber);
+    background: var(--card);
+    padding: var(--space-4) var(--space-4) var(--space-4) var(--space-4);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    box-shadow: 0 1px 2px rgba(25, 28, 33, 0.05);
+  }
+  .thesis h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-style: italic;
+    font-size: var(--text-h2);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+    text-wrap: balance;
+  }
+  .thesis p {
+    max-width: var(--prose);
+  }
+  .thesis p + p {
+    margin-top: 14px;
+  }
+  .thesis strong {
+    color: var(--slate);
+  }
+</style>
