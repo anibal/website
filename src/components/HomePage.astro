@@ -76,8 +76,7 @@ const d = getDict(locale);
       {d.services.items.map((item) => (
         <div class="service" data-reveal>
           <div class="num">{item.num}</div>
-          {/* TODO(session-4): title links to the service page once those exist */}
-          <h3>{item.title}</h3>
+          <h3><a href={item.href}>{item.title}</a></h3>
           <p>{item.text}</p>
         </div>
       ))}
@@ -95,8 +94,9 @@ const d = getDict(locale);
       <div class="ideas-grid">
         <div class="card" data-reveal>
           <span class="tag">{d.ideas.writing.tag}</span>
-          {/* TODO(session-4): link to /principles/ once the series landing exists */}
-          <h3>{d.ideas.writing.title}</h3>
+          <h3>
+            <a href={d.ideas.writing.href}>{d.ideas.writing.title}</a>
+          </h3>
         </div>
         <div class="card" data-reveal>
           <span class="tag">{d.ideas.podcast.tag}</span>
@@ -311,6 +311,10 @@ const d = getDict(locale);
     line-height: 1.25;
     letter-spacing: -0.01em;
     text-wrap: balance;
+  }
+  /* titles link to the service pages; rows keep their look otherwise */
+  .service h3 a {
+    color: var(--ink);
   }
   .service p {
     font-size: 0.99rem;

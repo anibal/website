@@ -5,7 +5,7 @@ category: decision
 status: active
 tags: [content]
 created: "2026-08-07T20:30:49"
-updated: "2026-08-07T20:31:30"
+updated: "2026-08-15T10:14:54"
 ---
 
 <!-- compiled_truth -->
@@ -28,4 +28,10 @@ updated: "2026-08-07T20:31:30"
   kind: decision
   summary: "captured from handoff IA + content model"
   source: HANDOFF-anibalrojas-site.md
+  affects: [old-site-archive-no-migration]
+
+- time: 2026-08-15T10:14:54
+  kind: decision
+  summary: "Principles landing links the 5 series articles to their i.usedtocode.com originals (Aníbal's call, session 4) — not the later Substack reposts; consistent with canonicalUrl pointing at the old site"
+  source: session 4
   affects: [old-site-archive-no-migration]

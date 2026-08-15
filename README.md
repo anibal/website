@@ -17,7 +17,7 @@ npm run preview  # serve the built site
 
 1. Add one `.md` file to `src/content/posts/` with frontmatter:
    `title, description, date, lang ("en"|"es"), tags[]` (+ optional `series`, `seriesOrder`, `translationOf`, `draft`, `heroImage`, `canonicalUrl`).
-2. Push. That's it — schema-validated at build; `draft: true` posts never render.
+2. Push. That's it — schema-validated at build. `draft: true` posts render in `astro dev` only and never reach production or RSS.
 
 ## Deploy
 
@@ -31,10 +31,13 @@ CI (`.github/workflows/ci.yml`) runs build + Lighthouse CI assertions on every P
 ```
 src/styles/tokens.css   the design system — every value traces here (handoff §3)
 src/styles/fonts.css    self-hosted woff2 (Fraunces variable, Plex Sans/Mono; latin + latin-ext)
-src/i18n/               UI strings (ui.ts) + locale routing helpers (utils.ts)
+src/styles/shiki-theme.json  code highlighting theme, amber/slate/ink on paper (wired in astro.config.mjs)
+src/i18n/               UI strings + all page copy (ui.ts) + locale routing, route-equivalence map (utils.ts)
+src/lib/posts.ts        posts queries (drafts render in dev only), reading time, translation lookup
 src/layouts/Base.astro  head/SEO/hreflang/JSON-LD + header/footer shell
-src/components/         Header, Footer, HomePage (shared per-locale template)
-src/pages/              routes; ES mirrors EN under /es/
+src/components/         Header, Footer, and one shared template per page type (HomePage, ServicePage, IdeasIndex, PostPage, PrinciplesPage)
+src/pages/              routes; ES mirrors EN under /es/ with localized slugs (/es/servicios/…, /es/principios/)
+src/pages/**/*.xml.ts   RSS per locale (/rss.xml, /es/rss.xml)
 src/content/            posts + testimonials collections (zod schemas in content.config.ts)
 reference/              approved mockup + copy docs (never shipped)
 scripts/                build-font-overrides.mjs (font metrics), shoot.mjs (design-QA screenshots → shots/)
@@ -52,4 +55,4 @@ scripts/                build-font-overrides.mjs (font metrics), shoot.mjs (desi
 
 ## Pending decisions (reserved for Aníbal — see handoff §10)
 
-Final domain (`site` in `astro.config.mjs` + `public/robots.txt`), public repo or not, portrait, testimonials, service-page copy sign-off, Bottleneck interactive vs static, and the real contact URLs (Calendly, email, LinkedIn, Substack — currently `#` placeholders in `Footer.astro`).
+Final domain (`site` in `astro.config.mjs` + `public/robots.txt`), public repo or not, portrait, testimonials (≥3 real or the section stays absent), service-page copy sign-off (drafts in `ui.ts`), first real posts (≥1 per locale — the LHCI representative-post gate waits on this, `TODO(first-post)` in `lighthouserc.cjs`), Calendly URL. The Bottleneck is settled: removed entirely (session 3, Aníbal's call).

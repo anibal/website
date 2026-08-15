@@ -1,0 +1,125 @@
+---
+/**
+ * /principles/ landing — the Fundamental Principles series as a coherent
+ * body of work (handoff §6.3). A typeset index with the care of a book's
+ * table of contents: mono numerals, Fraunces titles, one-line summaries.
+ * Articles are not migrated; links point to the originals on
+ * i.usedtocode.com (decision: old site is the canonical archive).
+ */
+import Base from '../layouts/Base.astro';
+import { getDict, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const d = getDict(locale);
+---
+
+<Base title={d.principles.meta.title} description={d.principles.meta.description}>
+  <div class="principles">
+    <header class="principles-head">
+      <div class="inner">
+        <span class="eyebrow">{d.principles.eyebrow}</span>
+        <h1>{d.principles.heading}</h1>
+        <p class="lede">{d.principles.intro}</p>
+        <p class="note">{d.principles.note}</p>
+      </div>
+    </header>
+
+    <div class="inner toc">
+      <ol>
+        {d.principles.articles.map((article) => (
+          <li>
+            <span class="num">{article.num}</span>
+            <div class="toc-main">
+              <h2>
+                <a href={article.href} target="_blank" rel="noopener">{article.title}</a>
+              </h2>
+              <p>{article.summary}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .principles-head {
+    padding: var(--space-6) var(--space-3) var(--space-4);
+  }
+  .principles-head h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-h2-lg);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .principles-head .lede {
+    max-width: var(--prose);
+    margin-top: var(--space-3);
+    font-size: var(--text-lede);
+  }
+  .principles-head .note {
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--muted);
+  }
+
+  /* the series as a table of contents: mono numerals, hairlines, Fraunces */
+  .toc {
+    padding: 0 var(--space-3) var(--space-6);
+  }
+  .toc ol {
+    list-style: none;
+  }
+  .toc li {
+    border-top: 1px solid var(--line);
+    padding: var(--space-3) 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .toc li:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 840px) {
+    .toc li {
+      grid-template-columns: 64px 1fr;
+      gap: var(--space-3);
+    }
+  }
+  .toc .num {
+    font-family: var(--font-mono);
+    color: var(--amber);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    padding-top: 4px;
+  }
+  .toc h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-1);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .toc h2 a {
+    color: var(--ink);
+  }
+  .toc h2 a:hover {
+    color: var(--amber);
+  }
+  .toc p {
+    margin-top: var(--space-1);
+    font-size: 0.97rem;
+    color: var(--muted);
+    max-width: 58ch;
+  }
+</style>

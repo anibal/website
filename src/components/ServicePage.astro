@@ -1,0 +1,229 @@
+---
+/**
+ * Service page template — shared by all three services in both locales.
+ * Structure per handoff §6.2: mono eyebrow → outcome headline → who it's
+ * for → how it runs (step row) → what you get → testimonial slot → CTA.
+ * Copy lives in src/i18n/ui.ts (servicePages) — drafts pending Aníbal's
+ * sign-off before launch.
+ */
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getDict, absoluteUrl, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  service: 'diagnostic' | 'fractional' | 'coaching';
+}
+
+const { locale, service } = Astro.props;
+const d = getDict(locale);
+const s = d.servicePages[service];
+
+// Testimonial slot: render only when a real quote references this service
+// (handoff: never placeholder quotes — the slot renders nothing until then).
+const testimonials = await getCollection(
+  'testimonials',
+  ({ data }) => data.lang === locale && data.serviceRef === service,
+);
+const testimonial = testimonials.find((t) => t.data.featured) ?? testimonials[0];
+
+// TODO(calendly): swap mailto for the Calendly URL once decided
+const ctaHref = `mailto:i@usedtocode.com?subject=${encodeURIComponent(s.ctaSubject)}`;
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: s.meta.title,
+  description: s.meta.description,
+  url: absoluteUrl(Astro.site!, Astro.url.pathname),
+  provider: {
+    '@type': 'Person',
+    name: 'Aníbal Rojas',
+    url: absoluteUrl(Astro.site!, locale === 'es' ? '/es/' : '/'),
+  },
+  areaServed: ['Latin America', 'United States'],
+};
+---
+
+<Base title={s.meta.title} description={s.meta.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+
+  <article class="service-page">
+    <header class="service-hero">
+      <div class="inner">
+        <span class="eyebrow">{s.eyebrow}</span>
+        <h1>{s.headline}</h1>
+        <p class="lede">{s.lede}</p>
+      </div>
+    </header>
+
+    <section class="who-for">
+      <div class="inner">
+        <h2>{d.servicePages.whoFor}</h2>
+        <ul>
+          {s.whoFor.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="how">
+      <div class="inner">
+        <h2>{d.servicePages.howItRuns}</h2>
+        <ol class="steps">
+          {s.steps.map((step, i) => (
+            <li>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{step.name}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="deliverables">
+      <div class="inner">
+        <h2>{d.servicePages.whatYouGet}</h2>
+        <ul>
+          {s.deliverables.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    {
+      testimonial && (
+        <section class="service-testimonial">
+          <div class="inner">
+            <blockquote>
+              <p>{testimonial.data.quote}</p>
+              <footer>
+                {testimonial.data.name} — {testimonial.data.role}, {testimonial.data.company}
+              </footer>
+            </blockquote>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="service-cta">
+      <div class="inner">
+        <a class="btn" href={ctaHref}>{d.cta.book}</a>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .service-hero {
+    padding: var(--space-6) var(--space-3) var(--space-5);
+  }
+  /* The h1 is the LCP candidate on this page: no load animation at all —
+     paint is never gated by motion (see brain: lcp-element-motion-constraint). */
+  .service-hero h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-h2-lg);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .service-hero .lede {
+    max-width: var(--prose);
+    margin-top: var(--space-3);
+    font-size: var(--text-lede);
+  }
+
+  .service-page section {
+    padding: 0 var(--space-3) var(--space-5);
+  }
+  .service-page h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-1);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  /* who-for + deliverables: quiet hanging-dash lists, prose measure */
+  .who-for ul,
+  .deliverables ul {
+    list-style: none;
+    max-width: var(--prose);
+  }
+  .who-for li,
+  .deliverables li {
+    padding-left: var(--space-3);
+    position: relative;
+  }
+  .who-for li + li,
+  .deliverables li + li {
+    margin-top: var(--space-2);
+  }
+  .who-for li::before,
+  .deliverables li::before {
+    content: '–';
+    position: absolute;
+    left: var(--space-1);
+    color: var(--amber);
+  }
+
+  /* how-it-runs step row: the services ladder's grammar (mono numerals,
+     hairlines), turned horizontal */
+  .steps {
+    list-style: none;
+    display: grid;
+    gap: var(--space-3);
+  }
+  @media (min-width: 700px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+  }
+  .steps li {
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-2);
+  }
+  .steps .num {
+    font-family: var(--font-mono);
+    color: var(--amber);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .steps h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-1);
+    letter-spacing: -0.01em;
+    margin: var(--space-1) 0;
+  }
+  .steps p {
+    font-size: 0.97rem;
+  }
+
+  /* testimonial slot: same family as the thesis block (amber left rule) */
+  .service-testimonial blockquote {
+    border-left: 3px solid var(--amber);
+    background: var(--card);
+    padding: var(--space-4);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    max-width: var(--prose);
+  }
+  .service-testimonial blockquote p {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-style: italic;
+    font-size: var(--text-1);
+    line-height: 1.4;
+  }
+  .service-testimonial footer {
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--muted);
+  }
+</style>

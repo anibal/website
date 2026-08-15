@@ -11,7 +11,13 @@ interface Props {
   /** Page-specific title; defaults to the site meta title. */
   title?: string;
   /** Page-specific description; defaults to the site meta description. */
-  description?: string;
+  /** Canonical URL override — republished posts point at the original. */
+  canonicalOverride?: string;
+  /**
+   * Explicit EN/ES path pair for pages whose equivalence the route map
+   * can't know (posts with `translationOf`, untranslated posts → index).
+   */
+  alternates?: { en: string; es: string };
 }
 
 const locale = getLocale(Astro.url);
@@ -20,9 +26,11 @@ const title = Astro.props.title ?? d.meta.title;
 const description = Astro.props.description ?? d.meta.description;
 
 const site = Astro.site!;
-const canonical = absoluteUrl(site, Astro.url.pathname);
-const enUrl = absoluteUrl(site, equivalentPath(Astro.url.pathname, 'en'));
-const esUrl = absoluteUrl(site, equivalentPath(Astro.url.pathname, 'es'));
+const canonical = Astro.props.canonicalOverride ?? absoluteUrl(site, Astro.url.pathname);
+const enPath = Astro.props.alternates?.en ?? equivalentPath(Astro.url.pathname, 'en');
+const esPath = Astro.props.alternates?.es ?? equivalentPath(Astro.url.pathname, 'es');
+const enUrl = absoluteUrl(site, enPath);
+const esUrl = absoluteUrl(site, esPath);
 
 // JSON-LD: Person, sitewide (handoff §8)
 const personLd = {
@@ -59,6 +67,14 @@ const personLd = {
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
+    {/* RSS, current locale's feed (handoff §6.4) */}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={d.ideasPage.meta.title}
+      href={locale === 'es' ? '/es/rss.xml' : '/rss.xml'}
+    />
+
     {/* canonical + hreflang pair (handoff §4) */}
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="en" href={enUrl} />
@@ -74,10 +90,13 @@ const personLd = {
     <meta property="og:locale" content={locale === 'es' ? 'es_CO' : 'en_US'} />
 
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+
+    {/* page-level head extras: JSON-LD types, etc. */}
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">{d.a11y.skip}</a>
-    <Header />
+    <Header alternates={Astro.props.alternates} />
     <main id="main">
       <slot />
     </main>

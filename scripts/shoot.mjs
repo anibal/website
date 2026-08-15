@@ -16,6 +16,14 @@ const WIDTHS = [360, 768, 1440];
 const ROUTES = [
   ['en', '/'],
   ['es', '/es/'],
+  ['en-service-diagnostic', '/services/diagnostic/'],
+  ['es-service-diagnostico', '/es/servicios/diagnostico/'],
+  ['en-ideas', '/ideas/'],
+  ['es-ideas', '/es/ideas/'],
+  ['en-principles', '/principles/'],
+  ['es-principios', '/es/principios/'],
+  // A representative post is QA'd in dev (`draft: true` renders there) until
+  // the first real post lands — dist/ has no post URLs yet.
 ];
 
 const server = spawn('python3', ['-m', 'http.server', String(PORT)], {

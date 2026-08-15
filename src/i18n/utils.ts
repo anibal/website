@@ -12,18 +12,37 @@ export function getDict(locale: Locale): Dict {
 }
 
 /**
+ * Routes whose slugs are localized (handoff §4), keyed by EN path.
+ * Anything unmapped (`/ideas/…` shares slugs across locales) falls back to
+ * the prefix swap. The switcher must land on the equivalent page, never the
+ * homepage — a route missing here is a bug, not a fallback case.
+ */
+const localizedRoutes: Record<string, string> = {
+  '/services/diagnostic/': '/es/servicios/diagnostico/',
+  '/services/fractional/': '/es/servicios/fractional/',
+  '/services/coaching/': '/es/servicios/coaching/',
+  '/principles/': '/es/principios/',
+};
+// Reverse lookups key on the *prefix-stripped* ES path (`/servicios/…`),
+// because equivalentPath strips `/es` before consulting the map.
+const reverseLocalizedRoutes: Record<string, string> = Object.fromEntries(
+  Object.entries(localizedRoutes).map(([en, es]) => [es.slice(3), en]),
+);
+
+/**
  * Path of `pathname` in `targetLocale`.
- * Generic prefix swap: `/services/coaching/` ↔ `/es/services/coaching/`.
- * TODO(session-4): routes with localized slugs (/es/servicios/…, /es/sobre-mi/…)
- * need an explicit equivalence map instead of the prefix swap.
+ * Explicit equivalence map first, generic prefix swap as the fallback:
+ * `/services/coaching/` ↔ `/es/servicios/coaching/`, `/ideas/` ↔ `/es/ideas/`.
  */
 export function equivalentPath(pathname: string, targetLocale: Locale): string {
   const esPrefix = '/es/';
   let base = pathname;
   if (base === '/es') base = '/';
   else if (base.startsWith(esPrefix)) base = base.slice(esPrefix.length - 1);
-  if (targetLocale === defaultLocale) return base;
-  return base === '/' ? '/es/' : `/es${base}`;
+  if (!base.endsWith('/')) base += '/';
+
+  if (targetLocale === defaultLocale) return reverseLocalizedRoutes[base] ?? base;
+  return localizedRoutes[base] ?? (base === '/' ? '/es/' : `/es${base}`);
 }
 
 /** Locale home path: `/` for EN, `/es/` for ES. */

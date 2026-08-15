@@ -1,9 +1,16 @@
 ---
 import { getLocale, getDict, equivalentPath, homePath } from '../i18n/utils';
 
+interface Props {
+  /** Explicit EN/ES pair from the page (posts); route map otherwise. */
+  alternates?: { en: string; es: string };
+}
+
 const locale = getLocale(Astro.url);
 const d = getDict(locale);
 const currentPath = Astro.url.pathname;
+const enPath = Astro.props.alternates?.en ?? equivalentPath(currentPath, 'en');
+const esPath = Astro.props.alternates?.es ?? equivalentPath(currentPath, 'es');
 ---
 
 <header class="site-header">
@@ -13,13 +20,13 @@ const currentPath = Astro.url.pathname;
       <nav class="seg" aria-label={d.a11y.language}>
         <a
           class:list={['seg-item', { active: locale === 'en' }]}
-          href={equivalentPath(currentPath, 'en')}
+          href={enPath}
           aria-current={locale === 'en' ? 'true' : undefined}
           hreflang="en"
         >EN</a>
         <a
           class:list={['seg-item', { active: locale === 'es' }]}
-          href={equivalentPath(currentPath, 'es')}
+          href={esPath}
           aria-current={locale === 'es' ? 'true' : undefined}
           hreflang="es"
         >ES</a>

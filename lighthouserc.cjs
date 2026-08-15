@@ -2,7 +2,19 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './dist',
-      url: ['/', '/es/'],
+      // TODO(first-post): add a representative post URL (both locales) once a
+      // real post exists — the post-gate was deferred in session 4 (Aníbal's
+      // call); drafts render in dev only and never reach dist/.
+      url: [
+        '/',
+        '/es/',
+        '/services/diagnostic/',
+        '/es/servicios/diagnostico/',
+        '/ideas/',
+        '/es/ideas/',
+        '/principles/',
+        '/es/principios/',
+      ],
       // median of 3 — one-run variance on shared/CI hardware is ±150ms
       numberOfRuns: 3,
       settings: {
