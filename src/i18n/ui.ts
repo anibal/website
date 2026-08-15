@@ -101,18 +101,6 @@ const en = {
       href: 'https://ocorres.com',
     },
   },
-  bottleneck: {
-    ariaLabel:
-      'Delivery pipeline simulation: work items flow left to right through ideas, code, review, integration and production. Amber queues show where the system is constrained.',
-    control: 'ai velocity:',
-    controlAria: 'AI velocity',
-    stages: ['ideas', 'code', 'review', 'integration', 'production'],
-    captions: {
-      '2019': 'bottleneck: code',
-      '2024': 'bottleneck: code review',
-      now: 'bottleneck: judgment & coordination',
-    },
-  },
   footer: {
     eyebrow: 'contact',
     title: 'Ready to talk about your team?',
@@ -212,18 +200,6 @@ const es: typeof en = {
       tag: 'podcast',
       title: 'O corres o te encaramas',
       href: 'https://ocorres.com',
-    },
-  },
-  bottleneck: {
-    ariaLabel:
-      'Simulación del pipeline de entrega: los ítems de trabajo fluyen de izquierda a derecha por ideas, código, revisión, integración y producción. Las colas ámbar muestran dónde está limitado el sistema.',
-    control: 'velocidad ia:',
-    controlAria: 'Velocidad de IA',
-    stages: ['ideas', 'código', 'revisión', 'integración', 'producción'],
-    captions: {
-      '2019': 'cuello de botella: código',
-      '2024': 'cuello de botella: revisión de código',
-      now: 'cuello de botella: criterio y coordinación',
     },
   },
   footer: {

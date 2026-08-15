@@ -2,14 +2,14 @@
 slug: roadmap
 title: Roadmap
 role: milestones
-updated: "2026-08-15T06:48:58"
+updated: "2026-08-15T08:09:05"
 ---
 
 # Roadmap
 
 ## Status
 
-**Session 3 (The Bottleneck) — DONE (2026-08-15).** The signature element shipped interactive: pure-TS sim shared by SSR snapshot + client rAF (invisible hydration), emergent queue migration, rework arc, 4.9KB vanilla JS, IO+visibility-gated, reduced-motion static snapshots, keyboard + aria-live caption. Gates 6/6 green. Both locale QA incl. mobile two-row label stagger. Aníbal retains the interactive-vs-static ratification (static path is one edit away).
+**Session 3 (The Bottleneck) — built, then REMOVED at Aníbal's call (2026-08-15).** Shipped interactive, passed all gates; after playing with it live, Aníbal decided not to keep it — neither interactive nor static SVG (archived: [[signature-element-bottleneck]]). The thesis section is text-only; the homepage has no signature element, and prize-worthiness now rests fully on editorial craft + performance ([[performance-as-design-feature]]). Code preserved in git history.
 
 **Session 2 (Homepage) — DONE (2026-08-14), deployed.** Both locales complete per the approved v2 copy doc: hero, thesis, whoami (dignified portrait placeholder, fixed dims — real photo still reserved), proof ×4, services 01/02/03, testimonials OMITTED per rule (zero real quotes), ideas ×2, footer CTA. Motion system live: CSS-only load sequence (720ms ≤ 900 budget), IntersectionObserver scroll reveals (~0.7KB inline, the site's first JS, progressive enhancement). Session-1 debts paid: real footer links + JSON-LD sameAs, CTAs → mailto (Calendly TODOs left), tokens audited (no raw hex/px), head minors, sitemap hreflang. Gates green 6/6 runs: 100×4, LCP=FCP ~780–820ms, CLS 0, TBT 0. Design QA done at 360/768/1440 both locales (`node scripts/shoot.mjs` — reduced-motion emulated for deterministic captures). Chanel pass: Ideas cards ship without the v1 mockup's per-card descriptions/arrows — v2 copy carries the section quieter.
 
@@ -19,7 +19,7 @@ updated: "2026-08-15T06:48:58"
 
 1. ~~**Scaffold & system**~~ — done.
 2. ~~**Homepage**~~ — done (copy-doc blocker resolved by Aníbal; v2 used verbatim).
-3. ~~**Signature element**~~ — done, shipped interactive pending Aníbal's ratification ([[signature-element-bottleneck]]).
+3. ~~**Signature element**~~ — built and removed (Aníbal's decision, see Status). Nothing carries over to session 4.
 4. **Templates** — service pages ×3, blog index + post layout, RSS per locale, Principles landing. Remember: localized-slug equivalence map for the locale switcher (`/es/servicios/…`); wire the Ideas writing card + services row titles as links.
 5. **Content & polish** — About, Contact (Calendly click-to-load → replaces mailto TODOs), OG generation (satori), JSON-LD Article/ProfessionalService, Plausible (deferred, only third-party request), testimonials in, launch checklist.
 6. **Phase 2 (optional)** — `/now/` page; dark mode becomes possible ([[no-dark-mode-v1]]).
@@ -36,5 +36,5 @@ updated: "2026-08-15T06:48:58"
 - Final domain (working name: anibalrojas.com — wired into `astro.config.mjs` + `public/robots.txt`).
 - Whether the repo goes public (the colophon links it if so).
 - Portrait choice; testimonial selection and order; service-page copy sign-off.
-- Whether the Bottleneck ships interactive or static; Calendly (CTAs are mailto meanwhile).
+- Calendly (CTAs are mailto meanwhile). The Bottleneck decision is settled: removed.
 - Ratify: `font-display: optional` ([[font-loading-strategy]]), devtools-throttled LHCI ([[lhci-devtools-throttling]]), LCP-element motion rule ([[lcp-element-motion-constraint]]).

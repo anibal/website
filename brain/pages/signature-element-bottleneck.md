@@ -2,10 +2,10 @@
 id: signature-element-bottleneck
 title: "The Bottleneck: one interactive signature element with a static fallback"
 category: decision
-status: active
+status: archived
 tags: [design, homepage]
 created: "2026-08-07T20:30:49"
-updated: "2026-08-15T06:48:29"
+updated: "2026-08-15T08:08:37"
 ---
 
 <!-- compiled_truth -->
@@ -39,3 +39,9 @@ updated: "2026-08-15T06:48:29"
   summary: "SHIPPED interactive (session 3): pure-TS sim (no DOM) shared by SSR snapshot + client rAF — hydration invisible (same seed/warm-up). Emergent, not scripted: queues migrate on preset switch; rework arc (review→code) lights at 2024/now. 4.9KB vanilla (budget 15KB), IO+visibility-gated rAF, reduced-motion = static per-preset snapshots, keyboard + aria-live caption. Headless sim verified: 2019 pile@code, 2024@review, now@review+integration; shipped 33/36/36 per 60s (4× code = +9% throughput — the punchline). Gates green 6/6: 100×4, LCP≤1116, CLS 0, TBT 0. Chanel cut: the throughput 'shipped' counter (the caption already says it). Awaits Aníbal's interactive-vs-static ratification."
   source: "session 3 build + LHCI + screenshot QA"
   affects: [performance-as-design-feature]
+
+- time: 2026-08-15T08:08:37
+  kind: reversal
+  summary: "Aníbal removed the Bottleneck entirely (interactive AND static SVG) after playing with the session-3 build: 'Nice experiment but we are not going to follow it.' The thesis section is text-only. Code remains in git history (removed in the session-3-revert commit). The OG-image basis for the homepage needs a different source in session 5."
+  source: brain archive-page
+  affects: [signature-element-bottleneck]
