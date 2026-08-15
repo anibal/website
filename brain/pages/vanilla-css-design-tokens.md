@@ -5,7 +5,7 @@ category: decision
 status: active
 tags: [design-system, css]
 created: "2026-08-07T20:30:49"
-updated: "2026-08-14T15:11:01"
+updated: "2026-08-15T14:08:01"
 ---
 
 <!-- compiled_truth -->
@@ -36,4 +36,10 @@ updated: "2026-08-14T15:11:01"
   kind: decision
   summary: "Session-2 token resolutions: --text-lede minted (1.08rem, ledes only); all 14px gaps snapped to --space-2; .btn:hover #000 → color-mix(ink 88%, black); portrait gradient via color-mix(slate,paper 30%) — zero raw hex/px outside tokens.css"
   source: SESSION-2.md part A.3
+  affects: [vanilla-css-design-tokens]
+
+- time: 2026-08-15T14:08:01
+  kind: decision
+  summary: "Link-affordance rule from Aníbal's session-4 review: ink-colored title links were undiscoverable (hover-only underline fails touch). System rule now: an ink title that is a link carries an always-visible amber mono arrow — → internal, ↗ external — CSS ::after, no markup. Applied on the services ladder, ideas cards, post index rows, and the principles TOC"
+  source: session 4 review
   affects: [vanilla-css-design-tokens]

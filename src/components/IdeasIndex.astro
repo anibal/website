@@ -135,6 +135,13 @@ for (const post of posts) {
     color: var(--ink);
     text-wrap: balance;
   }
+  /* the system-wide affordance: ink title + amber mono arrow = this goes somewhere */
+  .row-title::after {
+    content: ' →';
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--amber);
+  }
   .row-desc {
     margin-top: var(--space-1);
     font-size: 0.97rem;

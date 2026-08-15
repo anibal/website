@@ -116,6 +116,13 @@ const d = getDict(locale);
   .toc h2 a:hover {
     color: var(--amber);
   }
+  /* outbound mark: these leave for i.usedtocode.com */
+  .toc h2 a::after {
+    content: ' ↗';
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--amber);
+  }
   .toc p {
     margin-top: var(--space-1);
     font-size: 0.97rem;

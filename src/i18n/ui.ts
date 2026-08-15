@@ -103,6 +103,10 @@ const en = {
       title: 'O corres o te encaramas',
       href: 'https://ocorres.com',
     },
+    indexLink: {
+      label: 'the index → /ideas/',
+      href: '/ideas/',
+    },
   },
   /* ------------------------------------------------------------------
      Service pages (session 4) — drafts pending Aníbal's sign-off.
@@ -395,6 +399,10 @@ const es: typeof en = {
       tag: 'podcast',
       title: 'O corres o te encaramas',
       href: 'https://ocorres.com',
+    },
+    indexLink: {
+      label: 'el índice → /es/ideas/',
+      href: '/es/ideas/',
     },
   },
   /* ------------------------------------------------------------------

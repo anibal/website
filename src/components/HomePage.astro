@@ -105,6 +105,9 @@ const d = getDict(locale);
           </h3>
         </div>
       </div>
+      <p class="ideas-index-link" data-reveal>
+        <a href={d.ideas.indexLink.href}>{d.ideas.indexLink.label}</a>
+      </p>
     </div>
   </section>
 </Base>
@@ -312,9 +315,17 @@ const d = getDict(locale);
     letter-spacing: -0.01em;
     text-wrap: balance;
   }
-  /* titles link to the service pages; rows keep their look otherwise */
+  /* titles link to the service pages; rows keep their look otherwise, with
+     one always-visible affordance: a quiet amber mono arrow (hover-only
+     underlines are undiscoverable on touch) */
   .service h3 a {
     color: var(--ink);
+  }
+  .service h3 a::after {
+    content: ' →';
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--amber);
   }
   .service p {
     font-size: 0.99rem;
@@ -353,6 +364,16 @@ const d = getDict(locale);
     color: inherit;
     text-decoration: none;
   }
+  /* same affordance as the service rows; external links get the outbound mark */
+  .ideas .card h3 a::after {
+    content: ' →';
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--amber);
+  }
+  .ideas .card h3 a[target='_blank']::after {
+    content: ' ↗';
+  }
   .ideas .card .tag {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -361,5 +382,17 @@ const d = getDict(locale);
     display: block;
     margin-bottom: var(--space-2);
     text-transform: uppercase;
+  }
+  /* quiet mono way into the index — same register as the footer links */
+  .ideas-index-link {
+    margin-top: var(--space-3);
+  }
+  .ideas-index-link a {
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--muted);
+  }
+  .ideas-index-link a:hover {
+    color: var(--amber);
   }
 </style>
