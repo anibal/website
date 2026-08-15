@@ -10,15 +10,15 @@ const currentPath = Astro.url.pathname;
   <div class="header-inner">
     <a class="wordmark" href={homePath(locale)} aria-label="Aníbal Rojas — home"><b>~</b>/anibal-rojas</a>
     <div class="header-right">
-      <nav class="lang-toggle" aria-label={d.a11y.language}>
+      <nav class="seg" aria-label={d.a11y.language}>
         <a
-          class:list={['locale-link', { active: locale === 'en' }]}
+          class:list={['seg-item', { active: locale === 'en' }]}
           href={equivalentPath(currentPath, 'en')}
           aria-current={locale === 'en' ? 'true' : undefined}
           hreflang="en"
         >EN</a>
         <a
-          class:list={['locale-link', { active: locale === 'es' }]}
+          class:list={['seg-item', { active: locale === 'es' }]}
           href={equivalentPath(currentPath, 'es')}
           aria-current={locale === 'es' ? 'true' : undefined}
           hreflang="es"
@@ -62,24 +62,6 @@ const currentPath = Astro.url.pathname;
     align-items: center;
     gap: var(--space-2);
   }
-  .lang-toggle {
-    display: flex;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    background: var(--card);
-  }
-  .locale-link {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    padding: 7px 12px;
-    transition: color var(--dur-1) var(--ease);
-  }
-  .locale-link:hover { color: var(--amber); }
-  .locale-link.active { background: var(--ink); color: var(--paper); }
-  .locale-link.active:hover { color: var(--paper); }
   .header-cta { display: none; }
   @media (min-width: 700px) { .header-cta { display: inline-block; } }
 </style>

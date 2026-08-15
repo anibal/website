@@ -57,6 +57,30 @@ time, .mono-nums {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------- segmented control (locale switcher, Bottleneck presets) ---------- */
+.seg {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--card);
+}
+.seg-item {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 7px 12px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease);
+}
+.seg-item:hover { color: var(--amber); }
+.seg-item.active { background: var(--ink); color: var(--paper); }
+.seg-item.active:hover { color: var(--paper); }
+
 /* ---------- skip link ---------- */
 .skip-link {
   position: absolute;

@@ -7,6 +7,7 @@
  * render nothing). The Bottleneck signature element lands in session 3.
  */
 import Base from '../layouts/Base.astro';
+import Bottleneck from './bottleneck/Bottleneck.astro';
 import { getDict, type Locale } from '../i18n/utils';
 
 interface Props {
@@ -39,8 +40,8 @@ const d = getDict(locale);
         <h2>{d.thesis.title}</h2>
         <p>{d.thesis.p1}</p>
         <p set:html={d.thesis.p2} />
-        {/* TODO(session-3): The Bottleneck signature element mounts here (static SVG fallback first). */}
       </div>
+      <Bottleneck locale={locale} />
     </div>
   </section>
 

@@ -5,7 +5,7 @@ category: decision
 status: active
 tags: [design, homepage]
 created: "2026-08-07T20:30:49"
-updated: "2026-08-07T20:31:12"
+updated: "2026-08-15T06:48:29"
 ---
 
 <!-- compiled_truth -->
@@ -33,3 +33,9 @@ updated: "2026-08-07T20:31:12"
   summary: captured from handoff section 5
   source: HANDOFF-anibalrojas-site.md
   affects: [signature-element-bottleneck]
+
+- time: 2026-08-15T06:48:29
+  kind: evidence
+  summary: "SHIPPED interactive (session 3): pure-TS sim (no DOM) shared by SSR snapshot + client rAF — hydration invisible (same seed/warm-up). Emergent, not scripted: queues migrate on preset switch; rework arc (review→code) lights at 2024/now. 4.9KB vanilla (budget 15KB), IO+visibility-gated rAF, reduced-motion = static per-preset snapshots, keyboard + aria-live caption. Headless sim verified: 2019 pile@code, 2024@review, now@review+integration; shipped 33/36/36 per 60s (4× code = +9% throughput — the punchline). Gates green 6/6: 100×4, LCP≤1116, CLS 0, TBT 0. Chanel cut: the throughput 'shipped' counter (the caption already says it). Awaits Aníbal's interactive-vs-static ratification."
+  source: "session 3 build + LHCI + screenshot QA"
+  affects: [performance-as-design-feature]

@@ -2,14 +2,14 @@
 slug: architecture
 title: System architecture
 role: system architecture
-updated: "2026-08-14T15:12:13"
+updated: "2026-08-15T06:48:43"
 ---
 
 # System architecture
 
 ## Overview
 
-Static site, no application server. Content lives in Astro Content Collections validated by zod schemas; the build emits plain HTML/CSS with near-zero JavaScript; the only client JS is a short allowlist of Astro islands. **State: Sessions 1–2 built and gates-green** — scaffold (tokens/fonts/layout/i18n/CI) plus the complete bilingual homepage (hero, thesis, whoami, proof ×4, services ladder, ideas ×2, footer CTA; testimonials omitted per rule) with the full motion system. Service/blog/etc. templates, OG generation, Plausible, and the Bottleneck are NOT built yet.
+Static site, no application server. Content lives in Astro Content Collections validated by zod schemas; the build emits plain HTML/CSS with near-zero JavaScript; the only client JS is a short allowlist of Astro islands. **State: Sessions 1–2 built and gates-green** — scaffold (tokens/fonts/layout/i18n/CI) plus the complete bilingual homepage (hero, thesis, whoami, proof ×4, services ladder, ideas ×2, footer CTA; testimonials omitted per rule) with the full motion system. The Bottleneck signature element SHIPPED (session 3 — see [[signature-element-bottleneck]]); service/blog/etc. templates, OG generation, and Plausible are NOT built yet.
 
 ## Module graph
 
@@ -28,7 +28,7 @@ graph TD
     OG[OG image generation at build — satori — session 5]
   end
   subgraph islands[Islands — the only client JS, none shipped yet]
-    BOTTLE[The Bottleneck — signature element, client:visible — session 3]
+    BOTTLE[The Bottleneck — shipped: vanilla module, IO+visibility-gated rAF]
     CAL[Calendly loader — click-to-load — session 5]
   end
   POSTS --> PAGES
@@ -48,7 +48,7 @@ graph TD
 
 Routes (EN default at `/`, ES mirror under `/es/` — [[en-default-locale]]):
 
-- `/` and `/es/` — homepage (complete, both locales)
+- `/` and `/es/` — homepage (complete, both locales, Bottleneck live in the thesis section)
 - `/services/{diagnostic,fractional,coaching}` ↔ `/es/servicios/{diagnostico,fractional,coaching}` — session 4
 - `/principles/` ↔ `/es/principios/` — session 4
 - `/ideas/` and `/ideas/[slug]/` ↔ `/es/ideas/` — session 4 (translations cross-linked)

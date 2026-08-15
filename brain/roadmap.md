@@ -2,14 +2,16 @@
 slug: roadmap
 title: Roadmap
 role: milestones
-updated: "2026-08-14T15:11:37"
+updated: "2026-08-15T06:48:58"
 ---
 
 # Roadmap
 
 ## Status
 
-**Session 2 (Homepage) — DONE (2026-08-14), pending deploy.** Both locales complete per the approved v2 copy doc: hero, thesis, whoami (dignified portrait placeholder, fixed dims — real photo still reserved), proof ×4, services 01/02/03, testimonials OMITTED per rule (zero real quotes), ideas ×2, footer CTA. Motion system live: CSS-only load sequence (720ms ≤ 900 budget), IntersectionObserver scroll reveals (~0.7KB inline, the site's first JS, progressive enhancement). Session-1 debts paid: real footer links + JSON-LD sameAs, CTAs → mailto (Calendly TODOs left), tokens audited (no raw hex/px), head minors, sitemap hreflang. Gates green 6/6 runs: 100×4, LCP=FCP ~780–820ms, CLS 0, TBT 0. Design QA done at 360/768/1440 both locales (`node scripts/shoot.mjs` — reduced-motion emulated for deterministic captures). Chanel pass: Ideas cards ship without the v1 mockup's per-card descriptions/arrows — v2 copy carries the section quieter.
+**Session 3 (The Bottleneck) — DONE (2026-08-15).** The signature element shipped interactive: pure-TS sim shared by SSR snapshot + client rAF (invisible hydration), emergent queue migration, rework arc, 4.9KB vanilla JS, IO+visibility-gated, reduced-motion static snapshots, keyboard + aria-live caption. Gates 6/6 green. Both locale QA incl. mobile two-row label stagger. Aníbal retains the interactive-vs-static ratification (static path is one edit away).
+
+**Session 2 (Homepage) — DONE (2026-08-14), deployed.** Both locales complete per the approved v2 copy doc: hero, thesis, whoami (dignified portrait placeholder, fixed dims — real photo still reserved), proof ×4, services 01/02/03, testimonials OMITTED per rule (zero real quotes), ideas ×2, footer CTA. Motion system live: CSS-only load sequence (720ms ≤ 900 budget), IntersectionObserver scroll reveals (~0.7KB inline, the site's first JS, progressive enhancement). Session-1 debts paid: real footer links + JSON-LD sameAs, CTAs → mailto (Calendly TODOs left), tokens audited (no raw hex/px), head minors, sitemap hreflang. Gates green 6/6 runs: 100×4, LCP=FCP ~780–820ms, CLS 0, TBT 0. Design QA done at 360/768/1440 both locales (`node scripts/shoot.mjs` — reduced-motion emulated for deterministic captures). Chanel pass: Ideas cards ship without the v1 mockup's per-card descriptions/arrows — v2 copy carries the section quieter.
 
 **Deploy:** push to `main` auto-deploys to https://website.anibalrojas.workers.dev/ (Cloudflare Workers static assets).
 
@@ -17,7 +19,7 @@ updated: "2026-08-14T15:11:37"
 
 1. ~~**Scaffold & system**~~ — done.
 2. ~~**Homepage**~~ — done (copy-doc blocker resolved by Aníbal; v2 used verbatim).
-3. **Signature element** — the interactive Bottleneck as an island; honest self-critique; keep it or fall back to the static SVG ([[signature-element-bottleneck]]). Respect [[lcp-element-motion-constraint]].
+3. ~~**Signature element**~~ — done, shipped interactive pending Aníbal's ratification ([[signature-element-bottleneck]]).
 4. **Templates** — service pages ×3, blog index + post layout, RSS per locale, Principles landing. Remember: localized-slug equivalence map for the locale switcher (`/es/servicios/…`); wire the Ideas writing card + services row titles as links.
 5. **Content & polish** — About, Contact (Calendly click-to-load → replaces mailto TODOs), OG generation (satori), JSON-LD Article/ProfessionalService, Plausible (deferred, only third-party request), testimonials in, launch checklist.
 6. **Phase 2 (optional)** — `/now/` page; dark mode becomes possible ([[no-dark-mode-v1]]).
