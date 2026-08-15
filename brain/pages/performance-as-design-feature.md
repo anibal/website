@@ -5,7 +5,7 @@ category: decision
 status: active
 tags: [performance]
 created: "2026-08-07T20:30:49"
-updated: "2026-08-14T12:29:59"
+updated: "2026-08-14T15:11:01"
 ---
 
 <!-- compiled_truth -->
@@ -40,4 +40,10 @@ updated: "2026-08-14T12:29:59"
   kind: note
   summary: "Deploy pipeline live: Cloudflare (Workers static assets) auto-deploys main; preview at https://website.anibalrojas.workers.dev/ — verified both locales + fonts serving"
   source: "anibal, session 2 kickoff"
+  affects: [performance-as-design-feature]
+
+- time: 2026-08-14T15:11:01
+  kind: evidence
+  summary: "Full homepage (all sections, load sequence, reveal script ~0.7KB inline) gates green: 100/100/100/100 both locales, LCP=FCP 773–821ms, CLS 0.00000, TBT 0, 6/6 runs"
+  source: "LHCI, session 2"
   affects: [performance-as-design-feature]

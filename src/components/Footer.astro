@@ -1,24 +1,24 @@
 ---
-import { getLocale, useTranslations } from '../i18n/utils';
+import { getLocale, getDict } from '../i18n/utils';
 
 const locale = getLocale(Astro.url);
-const t = useTranslations(locale);
+const d = getDict(locale);
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer" id="contact">
   <div class="inner">
-    <span class="eyebrow">{t('footer.eyebrow')}</span>
-    <h2>{t('footer.title')}</h2>
-    {/* TODO(links): real Calendly URL + email + LinkedIn + Substack from Aníbal (content gate) */}
-    <a class="btn" href="#contact">{t('cta.book')}</a>
-    <nav class="links" aria-label="Elsewhere">
-      <a href="#">email</a>
-      <a href="#">linkedin</a>
-      <a href="#">substack</a>
+    <span class="eyebrow">{d.footer.eyebrow}</span>
+    <h2>{d.footer.title}</h2>
+    {/* TODO(calendly): swap mailto for the Calendly URL once decided */}
+    <a class="btn" href={d.cta.bookHref}>{d.cta.book}</a>
+    <nav class="links" aria-label={d.a11y.elsewhere}>
+      <a href="mailto:i@usedtocode.com">email</a>
+      <a href="https://www.linkedin.com/in/anibalrojas/" target="_blank" rel="noopener">linkedin</a>
+      <a href="https://anibal.substack.com/" target="_blank" rel="noopener">substack</a>
       <a href="https://ocorres.com" target="_blank" rel="noopener">ocorres.com</a>
     </nav>
-    <p class="colophon">© {year} Aníbal Rojas · Medellín, Colombia · {t('footer.colophon')}</p>
+    <p class="colophon">© {year} Aníbal Rojas · Medellín, Colombia · {d.footer.colophon}</p>
   </div>
 </footer>
 

@@ -107,7 +107,7 @@ time, .mono-nums {
   cursor: pointer;
   transition: background-color var(--dur-1) var(--ease);
 }
-.btn:hover { background: #000; }
+.btn:hover { background: color-mix(in srgb, var(--ink) 88%, black); }
 .btn.ghost {
   background: transparent;
   color: var(--ink);
@@ -129,13 +129,27 @@ time, .mono-nums {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* ---------- scroll reveals: hidden state applied by JS only (progressive
+   enhancement — with no JS every element is simply visible) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---------- reduced motion: everything stops, globally ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .cursor { animation: none; }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
   }
 }

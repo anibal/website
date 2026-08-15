@@ -1,8 +1,8 @@
 ---
-import { getLocale, useTranslations, equivalentPath, homePath } from '../i18n/utils';
+import { getLocale, getDict, equivalentPath, homePath } from '../i18n/utils';
 
 const locale = getLocale(Astro.url);
-const t = useTranslations(locale);
+const d = getDict(locale);
 const currentPath = Astro.url.pathname;
 ---
 
@@ -10,7 +10,7 @@ const currentPath = Astro.url.pathname;
   <div class="header-inner">
     <a class="wordmark" href={homePath(locale)} aria-label="Aníbal Rojas — home"><b>~</b>/anibal-rojas</a>
     <div class="header-right">
-      <nav class="lang-toggle" aria-label={t('a11y.language')}>
+      <nav class="lang-toggle" aria-label={d.a11y.language}>
         <a
           class:list={['locale-link', { active: locale === 'en' }]}
           href={equivalentPath(currentPath, 'en')}
@@ -24,8 +24,8 @@ const currentPath = Astro.url.pathname;
           hreflang="es"
         >ES</a>
       </nav>
-      {/* TODO(#contact-page): point at /contact/ once it exists (session 5) */}
-      <a class="btn header-cta" href="#contact">{t('cta.book')}</a>
+      {/* TODO(calendly): swap mailto for the Calendly URL once decided */}
+      <a class="btn header-cta" href={d.cta.bookHref}>{d.cta.book}</a>
     </div>
   </div>
 </header>
@@ -43,7 +43,7 @@ const currentPath = Astro.url.pathname;
   .header-inner {
     max-width: var(--max);
     margin: 0 auto;
-    padding: 14px var(--space-3);
+    padding: var(--space-2) var(--space-3);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,7 +60,7 @@ const currentPath = Astro.url.pathname;
   .header-right {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: var(--space-2);
   }
   .lang-toggle {
     display: flex;

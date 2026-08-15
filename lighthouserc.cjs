@@ -3,7 +3,8 @@ module.exports = {
     collect: {
       staticDistDir: './dist',
       url: ['/', '/es/'],
-      numberOfRuns: 1,
+      // median of 3 — one-run variance on shared/CI hardware is ±150ms
+      numberOfRuns: 3,
       settings: {
         // Real DevTools throttling (network + CPU), not Lantern simulation.
         // Rationale: with `simulate`, the Lantern model's floor on this design is

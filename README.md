@@ -37,6 +37,7 @@ src/components/         Header, Footer, HomePage (shared per-locale template)
 src/pages/              routes; ES mirrors EN under /es/
 src/content/            posts + testimonials collections (zod schemas in content.config.ts)
 reference/              approved mockup + copy docs (never shipped)
+scripts/                build-font-overrides.mjs (font metrics), shoot.mjs (design-QA screenshots → shots/)
 ```
 
 ## Conventions

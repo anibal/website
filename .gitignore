@@ -8,6 +8,9 @@ dist/
 # lighthouse ci
 .lighthouseci/
 
+# design-qa screenshots (scripts/shoot.mjs)
+shots/
+
 # env / os
 .env
 .env.*

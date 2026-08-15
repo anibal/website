@@ -2,14 +2,14 @@
 slug: architecture
 title: System architecture
 role: system architecture
-updated: "2026-08-08T00:56:23"
+updated: "2026-08-14T15:12:13"
 ---
 
 # System architecture
 
 ## Overview
 
-Static site, no application server. Content lives in Astro Content Collections validated by zod schemas; the build emits plain HTML/CSS with near-zero JavaScript; the only client JS is a short allowlist of Astro islands. **State: Session 1 (scaffold & system) is built and gates-green** — Astro 5 + @astrojs/sitemap, tokens/fonts/global styles, Base layout with Header/Footer, i18n routing with `/` + `/es/` homepages live, posts/testimonials collections schema'd, CI (build + Lighthouse CI) configured. Sections beyond hero+thesis, service/blog/etc. templates, OG generation and the Bottleneck are NOT built yet.
+Static site, no application server. Content lives in Astro Content Collections validated by zod schemas; the build emits plain HTML/CSS with near-zero JavaScript; the only client JS is a short allowlist of Astro islands. **State: Sessions 1–2 built and gates-green** — scaffold (tokens/fonts/layout/i18n/CI) plus the complete bilingual homepage (hero, thesis, whoami, proof ×4, services ladder, ideas ×2, footer CTA; testimonials omitted per rule) with the full motion system. Service/blog/etc. templates, OG generation, Plausible, and the Bottleneck are NOT built yet.
 
 ## Module graph
 
@@ -48,7 +48,7 @@ graph TD
 
 Routes (EN default at `/`, ES mirror under `/es/` — [[en-default-locale]]):
 
-- `/` and `/es/` — homepage (built: hero + thesis + header/footer; remaining sections session 2)
+- `/` and `/es/` — homepage (complete, both locales)
 - `/services/{diagnostic,fractional,coaching}` ↔ `/es/servicios/{diagnostico,fractional,coaching}` — session 4
 - `/principles/` ↔ `/es/principios/` — session 4
 - `/ideas/` and `/ideas/[slug]/` ↔ `/es/ideas/` — session 4 (translations cross-linked)

@@ -1,4 +1,4 @@
-import { defaultLocale, locales, ui, type Locale, type UiKey } from './ui';
+import { defaultLocale, locales, ui, type Dict, type Locale } from './ui';
 
 /** Locale of the current URL: everything under /es/ is Spanish. */
 export function getLocale(url: URL): Locale {
@@ -6,10 +6,9 @@ export function getLocale(url: URL): Locale {
   return (locales as readonly string[]).includes(first) ? (first as Locale) : defaultLocale;
 }
 
-export function useTranslations(locale: Locale) {
-  return function t(key: UiKey): string {
-    return ui[locale][key] ?? ui[defaultLocale][key];
-  };
+/** The full UI/copy dictionary for a locale. */
+export function getDict(locale: Locale): Dict {
+  return ui[locale] ?? ui[defaultLocale];
 }
 
 /**

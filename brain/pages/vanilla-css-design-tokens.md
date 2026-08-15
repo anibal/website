@@ -5,7 +5,7 @@ category: decision
 status: active
 tags: [design-system, css]
 created: "2026-08-07T20:30:49"
-updated: "2026-08-07T20:31:12"
+updated: "2026-08-14T15:11:01"
 ---
 
 <!-- compiled_truth -->
@@ -30,4 +30,10 @@ updated: "2026-08-07T20:31:12"
   kind: decision
   summary: captured from handoff tech spec
   source: HANDOFF-anibalrojas-site.md
+  affects: [vanilla-css-design-tokens]
+
+- time: 2026-08-14T15:11:01
+  kind: decision
+  summary: "Session-2 token resolutions: --text-lede minted (1.08rem, ledes only); all 14px gaps snapped to --space-2; .btn:hover #000 → color-mix(ink 88%, black); portrait gradient via color-mix(slate,paper 30%) — zero raw hex/px outside tokens.css"
+  source: SESSION-2.md part A.3
   affects: [vanilla-css-design-tokens]

@@ -5,7 +5,7 @@ category: decision
 status: active
 tags: [performance, ci]
 created: "2026-08-08T00:55:21"
-updated: "2026-08-08T00:55:50"
+updated: "2026-08-14T15:11:01"
 ---
 
 <!-- compiled_truth -->
@@ -35,3 +35,9 @@ updated: "2026-08-08T00:55:50"
   summary: "Lantern floor test: fontless page LCP 1502ms (FCP 681); text-wrap/cursor/em variants no effect; devtools throttling: FCP=LCP 848, CLS 0, TBT 0, perf 100 both locales"
   source: "LHCI runs, session 1"
   affects: [performance-as-design-feature]
+
+- time: 2026-08-14T15:11:01
+  kind: note
+  summary: "numberOfRuns raised to 3 (median) — one-run variance observed at ±150ms on EN FCP"
+  source: session 2
+  affects: [lhci-devtools-throttling]

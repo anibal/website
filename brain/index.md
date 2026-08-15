@@ -1,10 +1,11 @@
 # Brain Index
 
-_Auto-generated. Last updated 2026-08-14T19:41:06.161Z._
+_Auto-generated. Last updated 2026-08-15T00:55:18.911Z._
 
 - [astro-5-static-islands](pages/astro-5-static-islands.md) — category: decision | tags: [stack, performance] | **Decided:** Astro 5 with static output. Client JavaScript is an allowlist of three islands: the language-aware header (only if it proves ne
 - [en-default-locale](pages/en-default-locale.md) — category: decision | tags: [i18n, content] | **Decided:** EN is the default locale at `/`; Spanish lives under `/es/`.
 - [font-loading-strategy](pages/font-loading-strategy.md) — category: decision | tags: [performance, typography] | **Decided:** self-hosted woff2 subsets (latin + latin-ext via unicode-range) loaded with **`font-display: optional`** (not the handoff's `sw
+- [lcp-element-motion-constraint](pages/lcp-element-motion-constraint.md) — category: decision | tags: [performance, motion] | **Decided:** whatever element is (or could become) the LCP gets transform-only motion — never an opacity fade-in. On the homepage the hero h
 - [lhci-devtools-throttling](pages/lhci-devtools-throttling.md) — category: decision | tags: [performance, ci] | **Decided:** Lighthouse CI runs with `throttlingMethod: 'devtools'` (real network/CPU throttling, observed timings), mobile form factor, ass
 - [no-dark-mode-v1](pages/no-dark-mode-v1.md) — category: decision | tags: [design-system] | **Decided:** dark mode is out of scope for v1 — the handoff is explicit: do not half-ship it. Design tokens must be architected so a dark th
 - [old-site-archive-no-migration](pages/old-site-archive-no-migration.md) — category: decision | tags: [content] | **Decided:** `i.usedtocode.com` remains live and untouched as the public archive; the new `/ideas/` footer links to it ("archive → i.usedtoc

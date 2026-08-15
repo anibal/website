@@ -18,5 +18,13 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [sitemap()],
+  integrations: [
+    // i18n passed through so hreflang alternates appear in the sitemap
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: { en: 'en', es: 'es' },
+      },
+    }),
+  ],
 });
