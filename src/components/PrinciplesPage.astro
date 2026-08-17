@@ -1,10 +1,12 @@
 ---
 /**
- * /principles/ landing — the Fundamental Principles series as a coherent
- * body of work (handoff §6.3). A typeset index with the care of a book's
- * table of contents: mono numerals, Fraunces titles, one-line summaries.
- * Articles are not migrated; links point to the originals on
- * i.usedtocode.com (decision: old site is the canonical archive).
+ * /principles/ landing — expanded (session 5). Three-part structure:
+ *   1. Aburrida motif (Clarke's law, flipped)
+ *   2. Parte I — Principios de Trabajo (the credo)
+ *   3. Parte II — Mitos (7 myths, side effects, pending conclusion)
+ *   4. Parte III — La serie (5-article TOC, links to i.usedtocode.com)
+ * EN locale: page chrome in English, aburrida translated, body in Spanish
+ *   with a Spanish-forward note. ES locale: full Spanish throughout.
  */
 import Base from '../layouts/Base.astro';
 import { getDict, type Locale } from '../i18n/utils';
@@ -15,38 +17,103 @@ interface Props {
 
 const { locale } = Astro.props;
 const d = getDict(locale);
+const p = d.principles;
+const isEn = locale === 'en';
 ---
 
-<Base title={d.principles.meta.title} description={d.principles.meta.description}>
+<Base title={p.meta.title} description={p.meta.description}>
   <div class="principles">
     <header class="principles-head">
       <div class="inner">
-        <span class="eyebrow">{d.principles.eyebrow}</span>
-        <h1>{d.principles.heading}</h1>
-        <p class="lede">{d.principles.intro}</p>
-        <p class="note">{d.principles.note}</p>
+        <span class="eyebrow">{p.eyebrow}</span>
+        <h1>{p.heading}</h1>
       </div>
     </header>
 
-    <div class="inner toc">
-      <ol>
-        {d.principles.articles.map((article) => (
-          <li>
-            <span class="num">{article.num}</span>
-            <div class="toc-main">
-              <h2>
-                <a href={article.href} target="_blank" rel="noopener">{article.title}</a>
-              </h2>
-              <p>{article.summary}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+    <!-- aburrida motif -->
+    <div class="aburrida inner">
+      <p class="aburrida-hook">{p.aburrida.hook}</p>
+      <p class="aburrida-text">{p.aburrida.text}</p>
     </div>
+
+    {
+      p.spanishNote && (
+        <div class="inner">
+          <p class="spanish-note">{p.spanishNote}</p>
+        </div>
+      )
+    }
+
+    <!-- Parte I — Credo -->
+    <section class="section creo">
+      <div class="inner">
+        <h2 class="section-title">{p.credoTitle}</h2>
+        <div class="credo-body">
+          <p class="credo-lead">{p.credoLead}</p>
+          <p>{p.credo.belief}</p>
+          <p class="credo-why">{p.credo.why}</p>
+          <blockquote><p>{p.credo.counter}</p></blockquote>
+          <p>{p.credo.rebuttal}</p>
+          <p>{p.credo.consequence}</p>
+          <p class="credo-closing">{p.credo.closing}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parte II — Myths -->
+    <section class="section myths">
+      <div class="inner">
+        <h2 class="section-title">{p.mythsTitle}</h2>
+        <p class="myths-intro">{p.mythsIntro}</p>
+        <ol class="myths-list">
+          {p.myths.map((m) => (
+            <li>
+              <span class="num">{m.num}</span>
+              <span class="myth-text" set:html={m.text} />
+            </li>
+          ))}
+        </ol>
+        <div class="side-effects">
+          <h3>{p.sideEffectsTitle}</h3>
+          <ul>
+            {p.sideEffects.map((s) => (
+              <li>{s}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="pending">
+          <p>{p.mythsPending}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parte III — La serie (TOC) -->
+    <section class="section series">
+      <div class="inner">
+        <h2 class="section-title">{p.seriesTitle}</h2>
+        <p class="series-intro">{p.seriesIntro}</p>
+      </div>
+      <div class="inner toc">
+        <ol>
+          {p.articles.map((article) => (
+            <li>
+              <span class="num">{article.num}</span>
+              <div class="toc-main">
+                <h2>
+                  <a href={article.href} target="_blank" rel="noopener">{article.title}</a>
+                </h2>
+                <p>{article.summary}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
   </div>
 </Base>
 
 <style>
+  /* ---------- page header ---------- */
   .principles-head {
     padding: var(--space-6) var(--space-3) var(--space-4);
   }
@@ -60,21 +127,187 @@ const d = getDict(locale);
     max-width: 24ch;
     text-wrap: balance;
   }
-  .principles-head .lede {
-    max-width: var(--prose);
-    margin-top: var(--space-3);
-    font-size: var(--text-lede);
+
+  /* ---------- aburrida motif ---------- */
+  .aburrida {
+    padding: 0 var(--space-3) var(--space-5);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-5);
   }
-  .principles-head .note {
+  .aburrida-hook {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-2);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+    padding-left: var(--space-3);
+    border-left: 3px solid var(--amber);
+  }
+  .aburrida-text {
     margin-top: var(--space-2);
+    max-width: var(--prose);
+    font-size: var(--text-lede);
+    color: var(--muted);
+    padding-left: var(--space-3);
+  }
+
+  /* ---------- spanish-forward note (EN locale only) ---------- */
+  .spanish-note {
     font-family: var(--font-mono);
     font-size: var(--text--1);
     color: var(--muted);
+    padding: 0 var(--space-3) var(--space-4);
   }
 
-  /* the series as a table of contents: mono numerals, hairlines, Fraunces */
+  /* ---------- shared section chrome ---------- */
+  .section {
+    padding: 0 var(--space-3) var(--space-5);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-1);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 28ch;
+    text-wrap: balance;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ---------- Parte I — Credo ---------- */
+  .credo-body {
+    max-width: var(--prose);
+  }
+  .credo-body p {
+    margin-top: var(--space-2);
+    line-height: var(--leading-body);
+  }
+  .credo-lead {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-size: var(--text-lede);
+    font-weight: 500;
+    color: var(--amber);
+  }
+  .credo-why {
+    font-weight: 500;
+  }
+  .credo-body blockquote {
+    margin: var(--space-3) 0;
+    padding: var(--space-2) var(--space-3);
+    border-left: 2px solid var(--amber);
+    background: var(--card);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .credo-body blockquote p {
+    margin-top: 0;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .credo-closing {
+    font-weight: 500;
+    font-size: var(--text-1);
+    margin-top: var(--space-4)  !important;
+    color: var(--ink);
+  }
+
+  /* ---------- Parte II — Myths ---------- */
+  .myths-intro {
+    max-width: var(--prose);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-body);
+  }
+  .myths-list {
+    list-style: none;
+    max-width: var(--prose);
+  }
+  .myths-list li {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--line);
+  }
+  .myths-list li:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .myths-list .num {
+    font-family: var(--font-mono);
+    color: var(--amber);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+  .myths-list .myth-text {
+    line-height: var(--leading-body);
+  }
+  .myths-list .myth-text :global(strong) {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* side effects — inset warning */
+  .side-effects {
+    margin-top: var(--space-4);
+    padding: var(--space-3);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    max-width: var(--prose);
+  }
+  .side-effects h3 {
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    font-weight: 500;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
+  }
+  .side-effects ul {
+    list-style: none;
+  }
+  .side-effects li {
+    padding: var(--space-1) 0;
+    line-height: var(--leading-body);
+  }
+  .side-effects li::before {
+    content: '— ';
+    color: var(--amber);
+  }
+
+  /* pending scaffold */
+  .pending {
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    border: 1px dashed var(--amber);
+    border-radius: var(--radius-sm);
+    max-width: var(--prose);
+  }
+  .pending p {
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--amber);
+  }
+
+  /* ---------- Parte III — Series TOC ---------- */
+  .series {
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-5);
+  }
+  .series-intro {
+    max-width: var(--prose);
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-body);
+  }
+
   .toc {
-    padding: 0 var(--space-3) var(--space-6);
+    padding: 0 0 var(--space-6);
   }
   .toc ol {
     list-style: none;
@@ -116,7 +349,6 @@ const d = getDict(locale);
   .toc h2 a:hover {
     color: var(--amber);
   }
-  /* outbound mark: these leave for i.usedtocode.com */
   .toc h2 a::after {
     content: ' ↗';
     font-family: var(--font-mono);

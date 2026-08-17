@@ -256,9 +256,67 @@ const en = {
     },
     eyebrow: 'principles',
     heading: 'Fundamental Principles for working with coding assistants',
-    intro:
-      'Playbooks expire with every model release; principles don’t. This is a five-article series for software developers who are skeptical, disappointed, or frustrated by generative AI — and for the leaders and managers exploring what these tools do to their teams and their processes. It starts from the one fact that won’t change — hallucination is the mechanism, not the bug — and builds the two practices that follow from it: steering and backpressure.',
-    note: 'the series is written in spanish — five articles, 2025',
+    aburrida: {
+      hook: 'I help you turn AI into a boring technology.',
+      text: 'Because, as Arthur C. Clarke said, "Any sufficiently advanced technology is indistinguishable from magic." The problem with magic is that it happens to us, but we cannot manage it. When we approach these technologies from first principles, the magic disappears, and …',
+    },
+    spanishNote:
+      'This content is currently available in Spanish — the language in which it was written. An English version is forthcoming.',
+    credoTitle: 'Principios de Trabajo',
+    credoLead: 'Yo creo que',
+    credo: {
+      belief:
+        'Todo el mundo debe aprender qué es la Inteligencia Artificial Generativa, un LLM, un Agente, un harness, cómo estos funcionan y se relacionan.',
+      why: 'Porque no existe un futuro donde la Inteligencia Artificial Generativa no sea la herramienta fundamental de los trabajadores del conocimiento.',
+      counter:
+        'Pero las computadoras tienen décadas como la herramienta fundamental de los trabajadores del conocimiento y la mayoría de las personas no saben cómo funcionan.',
+      rebuttal:
+        'Sí, pero la Inteligencia Artificial Generativa es una tecnología fundamentalmente estadística, probabilística y estocástica diseñada para generar engagement simulando que hay una inteligencia como la humana del otro lado del prompt.',
+      consequence:
+        'Y cuando nos aproximamos a la IA Generativa desde la idea de que es una inteligencia como la humana, es muy difícil obtener resultados útiles, de calidad de forma consistente.',
+      closing: 'Todos podemos aprender, todos necesitamos aprender.',
+    },
+    mythsTitle:
+      'Todo lo que tu equipo cree sobre la inteligencia artificial generativa que no es verdad',
+    mythsIntro:
+      'Y estamos hablando de una tecnología que está diseñada para causar la ilusión de que todo esto es cierto, con el efecto colateral de:',
+    myths: [
+      {
+        num: '01',
+        text: 'Que son una base de datos, un repositorio de hechos.',
+      },
+      {
+        num: '02',
+        text: 'Que esta base de datos comprende <strong>todo</strong> el conocimiento humano.',
+      },
+      {
+        num: '03',
+        text: 'Que son neutrales, y que todo el conocimiento tiene el mismo "peso".',
+      },
+      {
+        num: '04',
+        text: 'Que operan en términos lógico/simbólicos.',
+      },
+      { num: '05', text: 'Que razonan.' },
+      {
+        num: '06',
+        text: 'Que aprenden al ser usados por nosotros.',
+      },
+      {
+        num: '07',
+        text: 'Que mientras más información les damos, operan mejor.',
+      },
+    ],
+    sideEffectsTitle: 'Efectos colaterales',
+    sideEffects: [
+      'Quedarnos dormidos al volante, enter, enter, enter, …',
+      'Apagar el pensamiento crítico',
+      'Convertirnos en forwarders',
+    ],
+    mythsPending: 'Y nada de esto ayuda a crear valor, ni a… PENDING',
+    seriesTitle: 'La serie',
+    seriesIntro:
+      'Estos cinco artículos construyen, desde primeros principios, las dos prácticas que hacen la diferencia: steering y backpressure.',
     articles: [
       {
         num: '01',
@@ -553,9 +611,66 @@ const es: typeof en = {
     },
     eyebrow: 'principios',
     heading: 'Principios Fundamentales para trabajar con Asistentes de Programación',
-    intro:
-      'Los playbooks caducan con cada modelo nuevo; los principios no. Esta es una serie de cinco artículos para desarrolladores de software escépticos, decepcionados o frustrados por la IA Generativa; y para los líderes y managers que exploran el impacto de estas tecnologías en sus equipos y procesos. Parte del único hecho que no va a cambiar — la alucinación es el mecanismo, no el defecto — y construye las dos prácticas que se derivan de él: steering y backpressure.',
-    note: 'cinco artículos, publicados primero en i.usedtocode.com — 2025',
+    aburrida: {
+      hook: 'Te ayudo a convertir la IA en una tecnología aburrida.',
+      text: 'Porque como dijo Arthur C. Clarke, "Cualquier tecnología suficientemente avanzada es indistinguible de la magia." El problema con la magia es que nos sucede, pero no se puede gestionar. Cuando nos aproximamos a estas tecnologías desde principios fundamentales la magia desaparece, y …',
+    },
+    spanishNote: '',
+    credoTitle: 'Principios de Trabajo',
+    credoLead: 'Yo creo que',
+    credo: {
+      belief:
+        'Todo el mundo debe aprender qué es la Inteligencia Artificial Generativa, un LLM, un Agente, un harness, cómo estos funcionan y se relacionan.',
+      why: 'Porque no existe un futuro donde la Inteligencia Artificial Generativa no sea la herramienta fundamental de los trabajadores del conocimiento.',
+      counter:
+        'Pero las computadoras tienen décadas como la herramienta fundamental de los trabajadores del conocimiento y la mayoría de las personas no saben cómo funcionan.',
+      rebuttal:
+        'Sí, pero la Inteligencia Artificial Generativa es una tecnología fundamentalmente estadística, probabilística y estocástica diseñada para generar engagement simulando que hay una inteligencia como la humana del otro lado del prompt.',
+      consequence:
+        'Y cuando nos aproximamos a la IA Generativa desde la idea de que es una inteligencia como la humana, es muy difícil obtener resultados útiles, de calidad de forma consistente.',
+      closing: 'Todos podemos aprender, todos necesitamos aprender.',
+    },
+    mythsTitle:
+      'Todo lo que tu equipo cree sobre la inteligencia artificial generativa que no es verdad',
+    mythsIntro:
+      'Y estamos hablando de una tecnología que está diseñada para causar la ilusión de que todo esto es cierto, con el efecto colateral de:',
+    myths: [
+      {
+        num: '01',
+        text: 'Que son una base de datos, un repositorio de hechos.',
+      },
+      {
+        num: '02',
+        text: 'Que esta base de datos comprende <strong>todo</strong> el conocimiento humano.',
+      },
+      {
+        num: '03',
+        text: 'Que son neutrales, y que todo el conocimiento tiene el mismo "peso".',
+      },
+      {
+        num: '04',
+        text: 'Que operan en términos lógico/simbólicos.',
+      },
+      { num: '05', text: 'Que razonan.' },
+      {
+        num: '06',
+        text: 'Que aprenden al ser usados por nosotros.',
+      },
+      {
+        num: '07',
+        text: 'Que mientras más información les damos, operan mejor.',
+      },
+    ],
+    sideEffectsTitle: 'Efectos colaterales',
+    sideEffects: [
+      'Quedarnos dormidos al volante, enter, enter, enter, …',
+      'Apagar el pensamiento crítico',
+      'Convertirnos en forwarders',
+    ],
+    mythsPending: 'Y nada de esto ayuda a crear valor, ni a… PENDING',
+    seriesTitle: 'La serie',
+    seriesIntro:
+      'Estos cinco artículos construyen, desde primeros principios, las dos prácticas que hacen la diferencia: steering y backpressure.',
     articles: [
       {
         num: '01',
