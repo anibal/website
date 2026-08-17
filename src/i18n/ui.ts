@@ -20,9 +20,8 @@ const en = {
     elsewhere: 'Elsewhere',
   },
   cta: {
-    // TODO(calendly): swap mailto for the Calendly URL once that decision lands
     book: 'Book a conversation',
-    bookHref: 'mailto:i@usedtocode.com?subject=Conversation',
+    bookHref: 'https://calendar.app.google/WXerTvr5UeuuVwDc8',
   },
   hero: {
     eyebrow: 'anibal rojas — engineering leadership · medellín',
@@ -355,6 +354,34 @@ const en = {
       },
     ],
   },
+  contactPage: {
+    meta: {
+      title: 'Contact — Aníbal Rojas',
+      description:
+        'Book a conversation about AI-assisted development, your engineering organization, or working together.',
+    },
+    eyebrow: 'contact',
+    heading: 'Contact',
+    intro:
+      'Every engagement starts with a conversation — no pitch, no deck, no commitment. Tell me about your team, your context, and what you need. I will tell you honestly whether and how I can help.',
+    after: 'You will be redirected to Google Calendar to pick a time that works for you.',
+  },
+  aboutPage: {
+    meta: {
+      title: 'About — Aníbal Rojas',
+      description:
+        'Three decades building and leading software organizations. VP of Engineering at Platzi. A year hands-deep in AI-assisted development. Executive coaching. Systems thinking.',
+    },
+    eyebrow: 'about',
+    heading: 'About',
+    aburrida: {
+      hook: 'I help you turn AI into a boring technology.',
+      text: 'Because, as Arthur C. Clarke said, "Any sufficiently advanced technology is indistinguishable from magic." The problem with magic is that it happens to us, but we cannot manage it. When we approach these technologies from first principles, the magic disappears.',
+    },
+    bioLabel: 'Background',
+    servicesLabel: 'How I work',
+    servicesCta: 'Learn more →',
+  },
   footer: {
     eyebrow: 'contact',
     title: 'Ready to talk about your team?',
@@ -374,9 +401,8 @@ const es: typeof en = {
     elsewhere: 'En otros sitios',
   },
   cta: {
-    // TODO(calendly): cambiar el mailto por la URL de Calendly cuando se decida
     book: 'Agenda una conversación',
-    bookHref: 'mailto:i@usedtocode.com?subject=Conversación',
+    bookHref: 'https://calendar.app.google/WXerTvr5UeuuVwDc8',
   },
   hero: {
     eyebrow: 'anibal rojas — liderazgo de ingeniería · medellín',
@@ -708,6 +734,34 @@ const es: typeof en = {
         href: 'https://i.usedtocode.com/2025/11/26/backpressure-rechazando-las-alucinaciones-negativas',
       },
     ],
+  },
+  contactPage: {
+    meta: {
+      title: 'Contacto — Aníbal Rojas',
+      description:
+        'Agenda una conversación sobre desarrollo asistido por IA, tu organización de ingeniería, o trabajar juntos.',
+    },
+    eyebrow: 'contacto',
+    heading: 'Contacto',
+    intro:
+      'Todo empieza con una conversación — sin pitch, sin presentación, sin compromiso. Cuéntame de tu equipo, tu contexto y lo que necesitas. Te diré con honestidad si puedo ayudar y cómo.',
+    after: 'Serás redirigido a Google Calendar para elegir el horario que mejor te funcione.',
+  },
+  aboutPage: {
+    meta: {
+      title: 'Sobre mí — Aníbal Rojas',
+      description:
+        'Tres décadas construyendo y liderando organizaciones de software. VP de Ingeniería en Platzi. Un año a fondo en desarrollo asistido por IA. Coaching ejecutivo. Pensamiento sistémico.',
+    },
+    eyebrow: 'sobre mí',
+    heading: 'Sobre mí',
+    aburrida: {
+      hook: 'Te ayudo a convertir la IA en una tecnología aburrida.',
+      text: 'Porque como dijo Arthur C. Clarke, "Cualquier tecnología suficientemente avanzada es indistinguible de la magia." El problema con la magia es que nos sucede, pero no se puede gestionar. Cuando nos aproximamos a estas tecnologías desde principios fundamentales la magia desaparece.',
+    },
+    bioLabel: 'Trayectoria',
+    servicesLabel: 'Cómo trabajo',
+    servicesCta: 'Más información →',
   },
   footer: {
     eyebrow: 'contacto',

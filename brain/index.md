@@ -1,6 +1,6 @@
 # Brain Index
 
-_Auto-generated. Last updated 2026-08-17T02:05:58.867Z._
+_Auto-generated. Last updated 2026-08-17T10:46:31.108Z._
 
 - [astro-5-static-islands](pages/astro-5-static-islands.md) — category: decision | tags: [stack, performance] | **Decided:** Astro 5 with static output. Client JavaScript is an allowlist of three islands: the language-aware header (only if it proves ne
 - [drafts-render-in-dev-only](pages/drafts-render-in-dev-only.md) — category: decision | tags: [content, workflow] | <current best understanding — replace this with the real content>

@@ -1,0 +1,232 @@
+---
+/**
+ * /about/ page — expanded biography + services overview.
+ * Pulls bio text from who.paragraphs, services from services.items,
+ * and the aburrida motif from aboutPage.aburrida.
+ */
+import Base from '../layouts/Base.astro';
+import { getDict, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const d = getDict(locale);
+const p = d.aboutPage;
+const ctaHref = d.cta.bookHref;
+---
+
+<Base title={p.meta.title} description={p.meta.description}>
+  <div class="about">
+    <header class="about-head">
+      <div class="inner">
+        <span class="eyebrow">{p.eyebrow}</span>
+        <h1>{p.heading}</h1>
+      </div>
+    </header>
+
+    <!-- aburrida motif -->
+    <div class="aburrida inner">
+      <p class="aburrida-hook">{p.aburrida.hook}</p>
+      <p class="aburrida-text">{p.aburrida.text}</p>
+    </div>
+
+    <!-- Bio -->
+    <section class="section bio">
+      <div class="inner">
+        <h2 class="section-title">{p.bioLabel}</h2>
+        <div class="bio-grid">
+          <div class="portrait" role="img" aria-label={d.who.portraitLabel}>{d.who.portraitLabel}</div>
+          <div class="bio-text">
+            {d.who.paragraphs.map((para) => <p set:html={para} />)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services overview -->
+    <section class="section services-overview">
+      <div class="inner">
+        <h2 class="section-title">{p.servicesLabel}</h2>
+        <div class="services-grid">
+          {d.services.items.map((item) => (
+            <a href={item.href} class="service-card">
+              <span class="num">{item.num}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <span class="cta-link">{p.servicesCta}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta section">
+      <div class="inner">
+        <a class="btn" href={ctaHref}>{d.cta.book}</a>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  /* ---------- page header ---------- */
+  .about-head {
+    padding: var(--space-6) var(--space-3) var(--space-4);
+  }
+  .about-head h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-h2-lg);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+
+  /* ---------- aburrida motif — shared with principles ---------- */
+  .aburrida {
+    padding: 0 var(--space-3) var(--space-5);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-5);
+  }
+  .aburrida-hook {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-2);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 22ch;
+    text-wrap: balance;
+    padding-left: var(--space-3);
+    border-left: 3px solid var(--amber);
+  }
+  .aburrida-text {
+    margin-top: var(--space-2);
+    max-width: var(--prose);
+    font-size: var(--text-lede);
+    color: var(--muted);
+    padding-left: var(--space-3);
+  }
+
+  /* ---------- shared section chrome ---------- */
+  .section {
+    padding: 0 var(--space-3) var(--space-5);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-1);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 28ch;
+    text-wrap: balance;
+    margin-bottom: var(--space-3);
+  }
+
+  /* ---------- bio ---------- */
+  .bio-grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+  @media (min-width: 900px) {
+    .bio-grid {
+      grid-template-columns: 200px 1fr;
+    }
+  }
+  .portrait {
+    width: 160px;
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    background: linear-gradient(140deg, var(--slate), color-mix(in srgb, var(--slate), var(--paper) 30%));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-align: center;
+    padding: var(--space-2);
+  }
+  .bio-text {
+    max-width: var(--prose);
+  }
+  .bio-text p + p {
+    margin-top: var(--space-2);
+  }
+  .bio-text :global(strong) {
+    font-weight: 600;
+  }
+  .bio-text :global(em) {
+    font-style: italic;
+  }
+
+  /* ---------- services grid ---------- */
+  .services-overview {
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-5);
+  }
+  .services-grid {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 700px) {
+    .services-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  .service-card {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color var(--dur-1) var(--ease);
+  }
+  .service-card:hover {
+    border-color: var(--amber);
+  }
+  .service-card .num {
+    font-family: var(--font-mono);
+    color: var(--amber);
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .service-card h3 {
+    margin-top: var(--space-1);
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-0);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .service-card p {
+    margin-top: var(--space-1);
+    font-size: 0.93rem;
+    color: var(--muted);
+    line-height: var(--leading-body);
+  }
+  .service-card .cta-link {
+    display: inline-block;
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--amber);
+  }
+
+  /* ---------- CTA ---------- */
+  .about-cta {
+    padding-bottom: var(--space-6);
+  }
+</style>

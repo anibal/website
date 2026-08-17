@@ -1,0 +1,63 @@
+---
+/**
+ * /contact/ page — single purpose: book a conversation.
+ * Links to Google Calendar (no Calendly embed — direct link).
+ */
+import Base from '../layouts/Base.astro';
+import { getDict, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const d = getDict(locale);
+const p = d.contactPage;
+---
+
+<Base title={p.meta.title} description={p.meta.description}>
+  <div class="contact">
+    <header class="contact-head">
+      <div class="inner">
+        <span class="eyebrow">{p.eyebrow}</span>
+        <h1>{p.heading}</h1>
+        <p class="lede">{p.intro}</p>
+        <div class="actions">
+          <a class="btn" href={d.cta.bookHref}>{d.cta.book}</a>
+        </div>
+        <p class="note">{p.after}</p>
+      </div>
+    </header>
+  </div>
+</Base>
+
+<style>
+  .contact-head {
+    padding: var(--space-6) var(--space-3) var(--space-6);
+    text-align: center;
+  }
+  .contact-head h1 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 560;
+    font-size: var(--text-h2-lg);
+    line-height: var(--leading-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .contact-head .lede {
+    max-width: var(--prose);
+    margin: var(--space-3) auto 0;
+    font-size: var(--text-lede);
+    line-height: var(--leading-body);
+  }
+  .actions {
+    margin-top: var(--space-4);
+  }
+  .note {
+    margin-top: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--muted);
+  }
+</style>

@@ -27,8 +27,7 @@ const testimonials = await getCollection(
 );
 const testimonial = testimonials.find((t) => t.data.featured) ?? testimonials[0];
 
-// TODO(calendly): swap mailto for the Calendly URL once decided
-const ctaHref = `mailto:i@usedtocode.com?subject=${encodeURIComponent(s.ctaSubject)}`;
+const ctaHref = d.cta.bookHref;
 
 const serviceLd = {
   '@context': 'https://schema.org',

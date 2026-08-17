@@ -22,6 +22,8 @@ const localizedRoutes: Record<string, string> = {
   '/services/fractional/': '/es/servicios/fractional/',
   '/services/coaching/': '/es/servicios/coaching/',
   '/principles/': '/es/principios/',
+  '/about/': '/es/sobre-mi/',
+  '/contact/': '/es/contacto/',
 };
 // Reverse lookups key on the *prefix-stripped* ES path (`/servicios/…`),
 // because equivalentPath strips `/es` before consulting the map.
