@@ -19,6 +19,12 @@ const en = {
     language: 'Language',
     elsewhere: 'Elsewhere',
   },
+  nav: {
+    services: { label: 'services', href: '/#services' },
+    ideas: { label: 'ideas', href: '/ideas/' },
+    principles: { label: 'principles', href: '/principles/' },
+    about: { label: 'about', href: '/about/' },
+  },
   cta: {
     book: 'Book a conversation',
     bookHref: 'https://calendar.app.google/WXerTvr5UeuuVwDc8',
@@ -399,6 +405,12 @@ const es: typeof en = {
     skip: 'Saltar al contenido',
     language: 'Idioma',
     elsewhere: 'En otros sitios',
+  },
+  nav: {
+    services: { label: 'servicios', href: '/es/#services' },
+    ideas: { label: 'ideas', href: '/es/ideas/' },
+    principles: { label: 'principios', href: '/es/principios/' },
+    about: { label: 'sobre mí', href: '/es/sobre-mi/' },
   },
   cta: {
     book: 'Agenda una conversación',

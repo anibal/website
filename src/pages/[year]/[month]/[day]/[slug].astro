@@ -1,0 +1,33 @@
+---
+import PostPage from '../../../../components/PostPage.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+type Post = CollectionEntry<'posts'>;
+
+export async function getStaticPaths() {
+  const posts = await getCollection(
+    'posts',
+    ({ data }) => import.meta.env.DEV || !data.draft,
+  );
+  return posts.map((post) => {
+    const date = post.data.date;
+    return {
+      params: {
+        year: String(date.getFullYear()),
+        month: String(date.getMonth() + 1).padStart(2, '0'),
+        day: String(date.getDate()).padStart(2, '0'),
+        slug: post.id,
+      },
+      props: { post, locale: post.data.lang as 'en' | 'es' },
+    };
+  });
+}
+
+interface Props {
+  post: Post;
+  locale: 'en' | 'es';
+}
+---
+
+<PostPage locale={Astro.props.locale} post={Astro.props.post} />

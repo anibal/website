@@ -1,21 +1,44 @@
 ---
 import { getLocale, getDict, equivalentPath, homePath } from '../i18n/utils';
+import type { Locale } from '../i18n/ui';
 
 interface Props {
-  /** Explicit EN/ES pair from the page (posts); route map otherwise. */
   alternates?: { en: string; es: string };
+  localeOverride?: Locale;
 }
 
-const locale = getLocale(Astro.url);
+const locale = Astro.props.localeOverride ?? getLocale(Astro.url);
 const d = getDict(locale);
 const currentPath = Astro.url.pathname;
 const enPath = Astro.props.alternates?.en ?? equivalentPath(currentPath, 'en');
 const esPath = Astro.props.alternates?.es ?? equivalentPath(currentPath, 'es');
+
+const navItems = [
+  { key: 'services', ...d.nav.services },
+  { key: 'ideas', ...d.nav.ideas },
+  { key: 'principles', ...d.nav.principles },
+  { key: 'about', ...d.nav.about },
+] as const;
+
+function isNavActive(current: string, itemHref: string): boolean {
+  if (itemHref.endsWith('#services')) {
+    const prefix = itemHref.startsWith('/es/') ? '/es/' : '/';
+    return current === prefix ||
+      current.startsWith(prefix + 'services/') ||
+      current.startsWith(prefix + 'servicios/');
+  }
+  return current === itemHref;
+}
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="wordmark" href={homePath(locale)} aria-label="Aníbal Rojas — home"><b>~</b>/anibal-rojas</a>
+    <div class="cli-line">
+      <span class="cli-prompt">ls</span>
+      <a class="wordmark" href={homePath(locale)} aria-label="Aníbal Rojas — home"><b>~</b>/anibal-rojas</a>
+      <span class="cli-prompt">{'<TAB>'}</span>
+    </div>
+
     <div class="header-right">
       <nav class="seg" aria-label={d.a11y.language}>
         <a
@@ -33,6 +56,17 @@ const esPath = Astro.props.alternates?.es ?? equivalentPath(currentPath, 'es');
       </nav>
       <a class="btn header-cta" href={d.cta.bookHref}>{d.cta.book}</a>
     </div>
+
+    <nav class="cli-nav" aria-label={d.a11y.language === 'Idioma' ? 'Navegación' : 'Navigation'}>
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={['cli-item', { active: isNavActive(currentPath, item.href) }]}
+          >{item.label}/</a>
+        ))
+      }
+    </nav>
   </div>
 </header>
 
@@ -51,23 +85,79 @@ const esPath = Astro.props.alternates?.es ?? equivalentPath(currentPath, 'es');
     margin: 0 auto;
     padding: var(--space-2) var(--space-3);
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
-    gap: var(--space-2);
+    flex-wrap: wrap;
+    row-gap: 0;
   }
-  .wordmark {
+  .header-inner > * { line-height: 1.3; }
+  }
+
+  /* ---- top line: ls ~/anibal-rojas <TAB> ---- */
+  .cli-line {
     font-family: var(--font-mono);
     font-size: 0.95rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4em;
+    flex-shrink: 0;
+  }
+  .cli-prompt {
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  .wordmark {
     font-weight: 500;
     color: var(--ink);
     letter-spacing: 0.01em;
+    text-decoration: none;
+    background-image: none;
   }
-  .wordmark b { color: var(--amber); }
+  .wordmark b { color: var(--amber); font-weight: 500; }
+
+  /* ---- completion row: services/  ideas/  principles/  about/ ---- */
+  .cli-nav {
+    flex: 0 0 100%;
+    font-family: var(--font-mono);
+    font-size: var(--text--1);
+    color: var(--muted);
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cli-nav::-webkit-scrollbar { display: none; }
+
+  .cli-item {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color var(--dur-1) var(--ease);
+    background-image: none;
+    flex-shrink: 0;
+    margin-right: 0.8em;
+  }
+  .cli-item:hover { color: var(--amber); }
+  .cli-item.active { color: var(--amber); }
+
+  /* ---- right cluster ---- */
   .header-right {
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    flex-shrink: 0;
+    margin-left: auto;
   }
   .header-cta { display: none; }
   @media (min-width: 700px) { .header-cta { display: inline-block; } }
+
+  /* narrow: drop ls + <TAB> noise, just wordmark on top */
+  @media (max-width: 480px) {
+    .cli-prompt { display: none; }
+    .cli-line { font-size: 0.88rem; }
+    .cli-nav { font-size: 0.78rem; }
+    .cli-item { margin-right: 0.5em; }
+  }
 </style>

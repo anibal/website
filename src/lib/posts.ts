@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { defaultLocale, type Locale } from '../i18n/ui';
+import { type Locale } from '../i18n/ui';
 
 export type Post = CollectionEntry<'posts'>;
 
@@ -17,11 +17,13 @@ export async function getPosts(lang: Locale): Promise<Post[]> {
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-/** URL path of a post in its own locale: `/ideas/x/` or `/es/ideas/x/`. */
+/** URL path of a post: `/${year}/${month}/${day}/${slug}/` — no locale prefix. */
 export function postPath(post: Post): string {
-  return post.data.lang === defaultLocale
-    ? `/ideas/${post.id}/`
-    : `/es/ideas/${post.id}/`;
+  const date = post.data.date;
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `/${y}/${m}/${d}/${post.id}/`;
 }
 
 /** Reading time in whole minutes at ~200 wpm. */

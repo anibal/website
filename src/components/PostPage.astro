@@ -1,6 +1,6 @@
 ---
 /**
- * Post layout — /ideas/[slug]/ in both locales (handoff §6.4).
+ * Post layout — /YYYY/MM/DD/slug/ (date-based, no locale prefix).
  * 66ch measure, Fraunces headings, amber-rule blockquotes (same family as
  * the thesis block), Shiki highlighting themed to the palette, mono metadata
  * with tabular numerals, translation cross-link, canonicalUrl support,
@@ -68,6 +68,7 @@ const articleLd = {
   description={post.data.description}
   canonicalOverride={post.data.canonicalUrl}
   alternates={alternates}
+  localeOverride={locale}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleLd)} />
 
